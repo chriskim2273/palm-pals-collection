@@ -1,6 +1,9 @@
-FROM nginx:alpine
+FROM python:3.12-alpine
 
-COPY index.html /usr/share/nginx/html/index.html
-COPY nginx.conf /etc/nginx/conf.d/default.conf
+WORKDIR /srv
+COPY server.py sync.js index.html ./
 
-EXPOSE 80
+ENV PORT=8000 DATA_DIR=/data
+EXPOSE 8000
+
+CMD ["python", "server.py"]
